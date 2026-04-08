@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Lib.Batching.Streams
+﻿namespace Lib.Batching.Streams
 {
     public class ArrayTokenStream : ITokenStream
     {
@@ -16,3 +14,4 @@ namespace Lib.Batching.Streams
         public ReadOnlySpan<int> GetTokens() => _tokens.AsSpan();
     }
 }
+

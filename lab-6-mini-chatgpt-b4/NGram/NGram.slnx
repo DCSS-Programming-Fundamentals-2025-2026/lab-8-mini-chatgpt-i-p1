@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="NGram/NGram.csproj" />
+  <Project Path="NGram.Tests/NGram.Tests.csproj" />
+  <Project Path="Lib.Corpus/Lib.Corpus.csproj" />
+  <Project Path="Lib.Tokenization/Lib.Tokenization.csproj" />
+</Solution>
