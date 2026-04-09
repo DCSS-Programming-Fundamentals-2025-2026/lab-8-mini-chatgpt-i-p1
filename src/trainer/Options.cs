@@ -14,7 +14,7 @@ public class Options
     [Option("epochs", Default = 3, HelpText = "Кількість епох тренування")]
     public int Epochs { get; set; }
 
-    [Option("out", Default = "checkpoint.json", HelpText = "Шлях для збереження checkpoint")]
+    [Option("out", Default = "data/checkpoint.json", HelpText = "Шлях для збереження checkpoint")]
     public string Out { get; set; }
 
     [Option("seed", Default = 42, HelpText = "Seed для відтворюваності")]
