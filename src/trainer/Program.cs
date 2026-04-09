@@ -1,5 +1,6 @@
 ﻿using CommandLine;
 using Lib.Batching;
+using Lib.Batching.Streams;
 using Lib.Corpus.Configuration;
 using Lib.Corpus.Domain;
 using Lib.Corpus.Infrastructure;
@@ -14,10 +15,7 @@ class Trainer
 {
     public static void Main(string[] args)
     {
-        string inputCommands = Console.ReadLine();
         Parser.Default.ParseArguments<Options>(args).WithParsed(RunOptions).WithNotParsed(HandleParseError);
-
-        //Тут продовжує команда Б2
     }
 
     public static void RunOptions(Options opts)
@@ -62,27 +60,12 @@ class Trainer
         Console.WriteLine($"Токенізація успішна. Розмір словника: {tokenizer.VocabSize}");
         Console.WriteLine($"Всього отримано токенів: {codedTrainTokens.Length}");
 
-        var batcher = new Batcher(tokens, opts.Seed);
-        var batches = batcher.CreateBatches();
 
-        ILanguageModel model = opts.Model switch
-        {
-            ModelType.Bigram => new BigramModel(),
-            ModelType.Trigram => new TrigramModel(),
-            ModelType.TinyNN => new TinyNNModel(opts.LearningRate), _ => throw new ArgumentException("Невідома модель")
-        };
+        ArrayTokenStream tokenStream = new ArrayTokenStream(codedTrainTokens);
+        TokenBatchProvider batchProvider = new TokenBatchProvider(tokenStream);
+        Random rng = new(opts.Seed);
+        Batch batches = batchProvider.GetBatch(32, 8, rng);
 
-        for (int epoch = 1; epoch <= opts.Epochs; epoch++)
-        {
-            foreach (var batch in batches)
-            {
-                model.Train(batch);
-            }
-
-            CheckAndSave(epoch, model, opts.Out);
-
-            Console.WriteLine($"Епоха {epoch}/{opts.Epochs} завершена.");
-        }
     }
 
     public static void HandleParseError(IEnumerable<Error> errs)
