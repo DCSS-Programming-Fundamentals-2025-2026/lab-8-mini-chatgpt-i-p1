@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Lib.MathCore/Lib.MathCore.csproj" />
+    <Project Path="src/Lib.Models.TinyNN/Lib.Models.TinyNN.csproj" />
+    <Project Path="src/Lib.Models.TinyTransformer/Lib.Models.TinyTransformer.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests\Integration.Neural\Integration.Neural.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>

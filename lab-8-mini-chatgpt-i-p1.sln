@@ -49,6 +49,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C0403084-0F1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trainer", "src\trainer\Trainer.csproj", "{19FDF77A-D37C-473D-9954-DEBDEA1A91AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.MathCore", "lab-6-mini-chatgpt-b5\src\Lib.MathCore\Lib.MathCore.csproj", "{42045876-FD4B-48B9-ABDC-EF2A5ABBF74E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Models.TinyNN", "lab-6-mini-chatgpt-b5\src\Lib.Models.TinyNN\Lib.Models.TinyNN.csproj", "{75656A8B-3BFF-4481-B2F3-A67EBB995A91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Models.TinyTransformer", "lab-6-mini-chatgpt-b5\src\Lib.Models.TinyTransformer\Lib.Models.TinyTransformer.csproj", "{1A3EEE61-D502-4977-976C-A0C1CD3954A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +116,18 @@ Global
 		{19FDF77A-D37C-473D-9954-DEBDEA1A91AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19FDF77A-D37C-473D-9954-DEBDEA1A91AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19FDF77A-D37C-473D-9954-DEBDEA1A91AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42045876-FD4B-48B9-ABDC-EF2A5ABBF74E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42045876-FD4B-48B9-ABDC-EF2A5ABBF74E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42045876-FD4B-48B9-ABDC-EF2A5ABBF74E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42045876-FD4B-48B9-ABDC-EF2A5ABBF74E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75656A8B-3BFF-4481-B2F3-A67EBB995A91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75656A8B-3BFF-4481-B2F3-A67EBB995A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75656A8B-3BFF-4481-B2F3-A67EBB995A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75656A8B-3BFF-4481-B2F3-A67EBB995A91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A3EEE61-D502-4977-976C-A0C1CD3954A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A3EEE61-D502-4977-976C-A0C1CD3954A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A3EEE61-D502-4977-976C-A0C1CD3954A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A3EEE61-D502-4977-976C-A0C1CD3954A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{542CD40F-48A7-4FD9-80F4-173CCB47E0B4} = {BB1E11F4-A668-436F-A03C-81A125F531D3}

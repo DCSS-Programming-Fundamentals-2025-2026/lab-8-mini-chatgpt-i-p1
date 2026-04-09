@@ -1674,19 +1674,19 @@
     ]
   },
   "packageFolders": {
-    "/home/maurice/.nuget/packages/": {}
+    "/home/igruk/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/maurice/Projects/OP/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization.Tests/Lib.Tokenization.Tests.csproj",
+      "projectUniqueName": "/home/igruk/Programming/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization.Tests/Lib.Tokenization.Tests.csproj",
       "projectName": "Lib.Tokenization.Tests",
-      "projectPath": "/home/maurice/Projects/OP/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization.Tests/Lib.Tokenization.Tests.csproj",
-      "packagesPath": "/home/maurice/.nuget/packages/",
-      "outputPath": "/home/maurice/Projects/OP/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization.Tests/obj/",
+      "projectPath": "/home/igruk/Programming/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization.Tests/Lib.Tokenization.Tests.csproj",
+      "packagesPath": "/home/igruk/.nuget/packages/",
+      "outputPath": "/home/igruk/Programming/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization.Tests/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/maurice/.nuget/NuGet/NuGet.Config"
+        "/home/igruk/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -1698,8 +1698,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/maurice/Projects/OP/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization/Lib.Tokenization.csproj": {
-              "projectPath": "/home/maurice/Projects/OP/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization/Lib.Tokenization.csproj"
+            "/home/igruk/Programming/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization/Lib.Tokenization.csproj": {
+              "projectPath": "/home/igruk/Programming/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization/Lib.Tokenization.csproj"
             }
           }
         }
@@ -1708,13 +1708,7 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.300"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -1755,11 +1749,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.21, 8.0.21]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.21, 8.0.21]"
+            "version": "[8.0.25, 8.0.25]"
           }
         ],
         "frameworkReferences": {
@@ -1767,7 +1757,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/maurice/.dotnet/sdk/9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.125/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
