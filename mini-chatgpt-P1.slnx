@@ -4,6 +4,9 @@
     <Project Path="lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization/Lib.Tokenization.csproj" />
     <Project Path="lab-6-mini-chatgpt-b2/src/Lib.Batching/Lib.Batching.csproj" />
     <Project Path="lab-6-mini-chatgpt-b2/src/Lib.Training/Lib.Training.csproj" />
+    <Project Path="NGram/Lib.Corpus/Lib.Corpus.csproj" />
+    <Project Path="NGram/Lib.Tokenization/Lib.Tokenization.csproj" />
+    <Project Path="NGram/NGram/NGram.csproj" />
   </Folder>
   <Folder Name="/Tester/">
     <Project Path="src/trainer/Trainer.csproj" />
