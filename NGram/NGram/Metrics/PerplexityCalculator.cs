@@ -1,4 +1,6 @@
-﻿namespace NGram.Metrics
+﻿public delegate float[] NextScoreProvider(ReadOnlySpan<int> context);
+
+namespace NGram.Metrics
 {
     public class PerplexityCalculator
     {
@@ -36,7 +38,7 @@
             return perplexity;
         }
 
-        public static double ComputePerplexity(ReadOnlySpan<int> tokens, Func<ReadOnlySpan<int>, float[]> nextScore)
+        public static double ComputePerplexity(ReadOnlySpan<int> tokens, NextScoreProvider nextScore)
         {
             if (tokens.Length < 2)
             {
@@ -48,8 +50,9 @@
             {
                 int[] context = tokens.Slice(0, i).ToArray();
                 float[] scores = nextScore(context);
+
                 float prob = scores[tokens[i]];
-                if (prob == 0) 
+                if (prob == 0)
                 {
                     prob = 1e-10f;
                 }
