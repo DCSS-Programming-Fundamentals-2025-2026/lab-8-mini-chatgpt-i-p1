@@ -1,14 +1,19 @@
 <Solution>
-  <Project Path="lab-6-mini-chatgpt-b1/src/Lib.CorpusTeamA1/Lib.Corpus/Lib.Corpus.csproj" />
-  <Project Path="lab-6-mini-chatgpt-b1/src/Lib.CorpusTeamA1/Lib.Corpus.Tests/Lib.Corpus.Tests.csproj" />
-  <Project Path="lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization/Lib.Tokenization.csproj" />
-  <Project Path="lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization.Tests/Lib.Tokenization.Tests.csproj" />
-  <Project Path="lab-6-mini-chatgpt-b1/tests/Integration.DataPipeline/Integration.DataPipeline.csproj" />
-
-  <Project Path="lab-6-mini-chatgpt-b2/src/Lib.Batching/Lib.Batching.csproj" />
-  <Project Path="lab-6-mini-chatgpt-b2/src/Lib.Training/Lib.Training.csproj" />
-  <Project Path="lab-6-mini-chatgpt-b2/tests/IntegrationTests/IntegrationTests.csproj" />
-  <Project Path="src/trainer/Trainer.csproj" />
+  <Folder Name="/Libs/">
+    <Project Path="lab-6-mini-chatgpt-b1/src/Lib.CorpusTeamA1/Lib.Corpus/Lib.Corpus.csproj" />
+    <Project Path="lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization/Lib.Tokenization.csproj" />
+    <Project Path="lab-6-mini-chatgpt-b2/src/Lib.Batching/Lib.Batching.csproj" />
+    <Project Path="lab-6-mini-chatgpt-b2/src/Lib.Training/Lib.Training.csproj" />
+  </Folder>
+  <Folder Name="/Tester/">
+    <Project Path="src/trainer/Trainer.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="lab-6-mini-chatgpt-b1/src/Lib.CorpusTeamA1/Lib.Corpus.Tests/Lib.Corpus.Tests.csproj" />
+    <Project Path="lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization.Tests/Lib.Tokenization.Tests.csproj" />
+    <Project Path="lab-6-mini-chatgpt-b1/tests/Integration.DataPipeline/Integration.DataPipeline.csproj" />
+    <Project Path="lab-6-mini-chatgpt-b2/tests/IntegrationTests/IntegrationTests.csproj" />
+  </Folder>
 
 </Solution>
 

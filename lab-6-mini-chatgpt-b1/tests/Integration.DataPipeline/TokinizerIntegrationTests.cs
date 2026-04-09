@@ -6,7 +6,6 @@ using Lib.Tokenization.Interfaces;
 using Lib.Tokenization.Model;
 
 namespace Integration.DataPipeline.Tests;
-
 public class Fake : IFileSystem
 {
     public string? File { get; set; }
