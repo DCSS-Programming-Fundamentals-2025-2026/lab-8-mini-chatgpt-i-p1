@@ -9,6 +9,12 @@ using Lib.Tokenization.Interfaces;
 using Lib.Tokenization.Model;
 using Lib.Training;
 
+using Lib.MathCore;
+using Lib.Models.TinyNN.Factories;
+using Lib.Models.TinyNN.Configuration; 
+using Lib.Models.TinyTransformer.Factories;
+using Lib.Models.TinyTransformer.Configuration;
+
 namespace Trainer;
 
 class Trainer
@@ -52,6 +58,7 @@ class Trainer
         else
         {
             Console.WriteLine("Invalid tokenizer type.");
+            return;
         }
 
         ITokenizer tokenizer = tokenizerFactory.BuildFromText(corpus.TrainText);
@@ -66,6 +73,22 @@ class Trainer
         Random rng = new(opts.Seed);
         Batch batches = batchProvider.GetBatch(32, 8, rng);
 
+        IMathOps mathOps = new MathOpsImpl();
+        object model = null; 
+
+        if (opts.Model.ToLower() == "tinynn")
+        {
+            var nnFactory = new TinyNNModelFactory();
+            var nnConfig = new TinyNNConfig(tokenizer.VocabSize, 64);
+            model = nnFactory.CreateNew(nnConfig, mathOps);
+            Console.WriteLine("TinyNN created successfully!");
+        }
+        else if (opts.Model.ToLower() == "tinytransformer")
+        {
+            var tfConfig = new TinyTransformerConfig(tokenizer.VocabSize, 64, 2, 8, opts.Seed);
+            model = TinyTransformerModelFactory.CreateAuto(tfConfig);
+            Console.WriteLine("TinyTransformer created successfully!");
+        }
     }
 
     public static void HandleParseError(IEnumerable<Error> errs)
@@ -73,6 +96,3 @@ class Trainer
         Console.WriteLine("Incorrect arguments");
     }
 }
-
-
-

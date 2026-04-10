@@ -1,27 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-<ItemGroup>
-    <None Update="data\**\*.*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <None Update="data\**\*.*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\lab-6-mini-chatgpt-b1\src\Lib.CorpusTeamA1\Lib.Corpus\Lib.Corpus.csproj" />
-    <ProjectReference Include="..\..\lab-6-mini-chatgpt-b1\src\Lib.TokenizationTeamA2\Lib.Tokenization\Lib.Tokenization.csproj" />
-    <ProjectReference Include="..\..\lab-6-mini-chatgpt-b2\src\Lib.Batching\Lib.Batching.csproj" />
-    <ProjectReference Include="..\..\lab-6-mini-chatgpt-b2\src\Lib.Training\Lib.Training.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\lab-6-mini-chatgpt-b1\src\Lib.CorpusTeamA1\Lib.Corpus\Lib.Corpus.csproj" />
+        <ProjectReference Include="..\..\lab-6-mini-chatgpt-b1\src\Lib.TokenizationTeamA2\Lib.Tokenization\Lib.Tokenization.csproj" />
 
-  <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.9.1" />
-  </ItemGroup>
+        <ProjectReference Include="..\..\lab-6-mini-chatgpt-b2\src\Lib.Batching\Lib.Batching.csproj" />
+        <ProjectReference Include="..\..\lab-6-mini-chatgpt-b2\src\Lib.Training\Lib.Training.csproj" />
+
+        <ProjectReference Include="..\..\lab-6-mini-chatgpt-b5\src\Lib.MathCore\Lib.MathCore.csproj" />
+        <ProjectReference Include="..\..\lab-6-mini-chatgpt-b5\src\Lib.Models.TinyNN\Lib.Models.TinyNN.csproj" />
+        <ProjectReference Include="..\..\lab-6-mini-chatgpt-b5\src\Lib.Models.TinyTransformer\Lib.Models.TinyTransformer.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    </ItemGroup>
 
 </Project>
