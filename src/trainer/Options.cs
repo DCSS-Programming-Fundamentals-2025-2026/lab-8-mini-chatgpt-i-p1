@@ -2,7 +2,7 @@
 
 public class Options
 {
-    [Option("data", Default = "data/sample.txt", HelpText = "Шлях до файлу корпусу")]
+    [Option("data", Default = "src/trainer/data/sample.txt", HelpText = "Шлях до файлу корпусу")]
     public string Data { get; set; }
 
     [Option("model", Default = "trigram", HelpText = "Тип моделі: bigram, trigram, tinynn, tinytransformer")]
