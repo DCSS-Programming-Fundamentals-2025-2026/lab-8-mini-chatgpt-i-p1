@@ -20,6 +20,6 @@ public class Options
     [Option("seed", Default = 42, HelpText = "Seed для відтворюваності")]
     public int Seed { get; set; }
 
-    [Option("lr", Default = 0.1, HelpText = "Learning rate (для TinyNN)")]
+    [Option("lr", Default = 0.1f, HelpText = "Learning rate (для TinyNN)")]
     public float LearningRate { get; set; }
 }
