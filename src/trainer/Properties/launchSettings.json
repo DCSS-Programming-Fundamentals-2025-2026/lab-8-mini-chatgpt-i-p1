@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Trainer": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\KPI\\semester 2\\OP\\lab-8-mini-chatgpt-i-p1\\src\\trainer"
+    }
+  }
+}

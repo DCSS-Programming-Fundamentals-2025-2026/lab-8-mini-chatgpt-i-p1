@@ -23,6 +23,7 @@
         <ProjectReference Include="..\..\lab-6-mini-chatgpt-b5\src\Lib.MathCore\Lib.MathCore.csproj" />
         <ProjectReference Include="..\..\lab-6-mini-chatgpt-b5\src\Lib.Models.TinyNN\Lib.Models.TinyNN.csproj" />
         <ProjectReference Include="..\..\lab-6-mini-chatgpt-b5\src\Lib.Models.TinyTransformer\Lib.Models.TinyTransformer.csproj" />
+        <ProjectReference Include="..\..\NGram\NGram\NGram.csproj" />
     </ItemGroup>
 
     <ItemGroup>

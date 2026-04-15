@@ -5,15 +5,18 @@ using Lib.Corpus.Configuration;
 using Lib.Corpus.Domain;
 using Lib.Corpus.Infrastructure;
 using Lib.Corpus.Processing;
+using Lib.MathCore;
+using Lib.Models.TinyNN;
+using Lib.Models.TinyNN.Configuration; 
+using Lib.Models.TinyNN.Factories;
+using Lib.Models.TinyTransformer;
+using Lib.Models.TinyTransformer.Configuration;
+using Lib.Models.TinyTransformer.Factories;
 using Lib.Tokenization.Interfaces;
 using Lib.Tokenization.Model;
-using Lib.Training;
-
-using Lib.MathCore;
-using Lib.Models.TinyNN.Factories;
-using Lib.Models.TinyNN.Configuration; 
-using Lib.Models.TinyTransformer.Factories;
-using Lib.Models.TinyTransformer.Configuration;
+using MiniChatGPT.Contracts;
+using NGram;
+using NGram.ModelFactory;
 
 namespace Trainer;
 
@@ -61,7 +64,7 @@ class Trainer
             return;
         }
 
-        ITokenizer tokenizer = tokenizerFactory.BuildFromText(corpus.TrainText);
+        Lib.Tokenization.Interfaces.ITokenizer tokenizer = tokenizerFactory.BuildFromText(corpus.TrainText);
         int[] codedTrainTokens = tokenizer.Encode(corpus.TrainText);
 
         Console.WriteLine($"Токенізація успішна. Розмір словника: {tokenizer.VocabSize}");
@@ -70,24 +73,72 @@ class Trainer
 
         ArrayTokenStream tokenStream = new ArrayTokenStream(codedTrainTokens);
         TokenBatchProvider batchProvider = new TokenBatchProvider(tokenStream);
+        NGramModelFactory modelFactory = new NGramModelFactory();
+        JsonCheckpointIO json = new JsonCheckpointIO();
         Random rng = new(opts.Seed);
         Batch batches = batchProvider.GetBatch(32, 8, rng);
 
         IMathOps mathOps = new MathOpsImpl();
-        object model = null; 
 
         if (opts.Model.ToLower() == "tinynn")
         {
             var nnFactory = new TinyNNModelFactory();
             var nnConfig = new TinyNNConfig(tokenizer.VocabSize, 64);
-            model = nnFactory.CreateNew(nnConfig, mathOps);
+            TinyNNModel model = nnFactory.CreateNew(nnConfig, mathOps);
             Console.WriteLine("TinyNN created successfully!");
+
+            for (int i = 0; i < opts.Epochs; i++)
+            {
+                float totalLoss = 0;
+                int contextSize = 8; 
+                for (int j = 0; j < codedTrainTokens.Length - contextSize; j++)
+                {
+                    ReadOnlySpan<int> context = new ReadOnlySpan<int>(codedTrainTokens, i, contextSize);
+                    int target = codedTrainTokens[i + contextSize];
+                    float loss = model.TrainStep(context, target, opts.LearningRate);
+                    totalLoss += loss;
+                }
+            }
+
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, model.ToPayload, opts.Seed, );
+            json.Save(opts.Out, checkpoint);
         }
         else if (opts.Model.ToLower() == "tinytransformer")
         {
             var tfConfig = new TinyTransformerConfig(tokenizer.VocabSize, 64, 2, 8, opts.Seed);
-            model = TinyTransformerModelFactory.CreateAuto(tfConfig);
+            TinyTransformerModel model = TinyTransformerModelFactory.CreateAuto(tfConfig);
             Console.WriteLine("TinyTransformer created successfully!");
+
+
+
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, model.GetPayloadForCheckpoint, opts.Seed, );
+            json.Save(opts.Out, checkpoint);
+
+        }
+        else if (opts.Model.ToLower() == "trigram")
+        {
+            TrigramModel trigram = modelFactory.CreateTrigramModel((tokenizer.VocabSize));
+            Console.WriteLine("Trigram created successfully!");
+
+            trigram.Train(codedTrainTokens);
+
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, trigram.GetPayloadForCheckpoint, opts.Seed, );
+            json.Save(opts.Out, checkpoint);
+
+        }
+        else if (opts.Model.ToLower() == "bigram")
+        {
+            NGramModel bigram = modelFactory.CreateBigramModel((tokenizer.VocabSize));
+            Console.WriteLine("Bigram created successfully!");
+
+            bigram.Train(codedTrainTokens);
+
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, bigram.GetPayloadForCheckpoint, opts.Seed, );
+            json.Save(opts.Out, checkpoint);
+        }
+        else
+        {
+            Console.WriteLine("Incorrect model");
         }
     }
 
