@@ -8,6 +8,12 @@ namespace Lib.Tokenization.Tokanizers
     public class WordTokenizer : ITokenizer
     {
         private readonly WordVocabulary _vocabulary;
+        private readonly string Version = "1.0.0";
+    
+        public string GetContractFingerprint()
+        {
+            return Version;
+        }
 
         public WordTokenizer(WordVocabulary vocabulary)
         {
