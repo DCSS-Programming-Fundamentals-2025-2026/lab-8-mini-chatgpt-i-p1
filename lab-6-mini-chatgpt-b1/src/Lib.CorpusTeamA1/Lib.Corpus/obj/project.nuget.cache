@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "C+U/g+Rsgiw=",
+  "dgSpecHash": "Xr3w+tYNNbM=",
   "success": true,
-  "projectFilePath": "/home/maurice/Projects/OP/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.CorpusTeamA1/Lib.Corpus/Lib.Corpus.csproj",
-  "expectedPackageFiles": [
-    "/home/maurice/.nuget/packages/microsoft.netcore.app.ref/8.0.21/microsoft.netcore.app.ref.8.0.21.nupkg.sha512",
-    "/home/maurice/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\KPI\\semester 2\\OP\\lab-8-mini-chatgpt-i-p1\\lab-6-mini-chatgpt-b1\\src\\Lib.CorpusTeamA1\\Lib.Corpus\\Lib.Corpus.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "H8A5zcLyvf4=",
+  "dgSpecHash": "kCyu8RpwRco=",
   "success": true,
-  "projectFilePath": "/home/maurice/Projects/OP/lab-8-mini-chatgpt-i-p1/lab-6-mini-chatgpt-b1/src/Lib.TokenizationTeamA2/Lib.Tokenization/Lib.Tokenization.csproj",
-  "expectedPackageFiles": [
-    "/home/maurice/.nuget/packages/microsoft.netcore.app.ref/8.0.21/microsoft.netcore.app.ref.8.0.21.nupkg.sha512",
-    "/home/maurice/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.21/microsoft.aspnetcore.app.ref.8.0.21.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\KPI\\semester 2\\OP\\lab-8-mini-chatgpt-i-p1\\lab-6-mini-chatgpt-b1\\src\\Lib.TokenizationTeamA2\\Lib.Tokenization\\Lib.Tokenization.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

@@ -20,7 +20,7 @@ using NGram.ModelFactory;
 
 namespace Trainer;
 
-class Trainer
+public class Trainer
 {
     public static void Main(string[] args)
     {
@@ -103,14 +103,14 @@ class Trainer
                 int contextSize = 8; 
                 for (int j = 0; j < codedTrainTokens.Length - contextSize; j++)
                 {
-                    ReadOnlySpan<int> context = new ReadOnlySpan<int>(codedTrainTokens, i, contextSize);
+                    ReadOnlySpan<int> context = new ReadOnlySpan<int>(codedTrainTokens, j, contextSize);
                     int target = codedTrainTokens[i + contextSize];
                     float loss = model.TrainStep(context, target, opts.LearningRate);
                     totalLoss += loss;
                 }
             }
 
-            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, model.ToPayload, opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Tokenizer, tokenizer.GetPayloadForCheckpoint(), model.ToPayload(), opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
             json.Save(opts.Out, checkpoint);
         }
         else if (opts.Model.ToLower() == "tinytransformer")
@@ -120,7 +120,7 @@ class Trainer
             ModelVer = model.GetContractFingerprint();
             Console.WriteLine("TinyTransformer created successfully!");
 
-            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, model.GetPayloadForCheckpoint, opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Tokenizer, tokenizer.GetPayloadForCheckpoint(), model.GetPayloadForCheckpoint(), opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
             json.Save(opts.Out, checkpoint);
 
         }
@@ -132,7 +132,7 @@ class Trainer
 
             trigram.Train(codedTrainTokens);
 
-            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, trigram.GetPayloadForCheckpoint, opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Tokenizer, tokenizer.GetPayloadForCheckpoint(), trigram.GetPayloadForCheckpoint(), opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
             json.Save(opts.Out, checkpoint);
 
         }
@@ -144,13 +144,16 @@ class Trainer
 
             bigram.Train(codedTrainTokens);
 
-            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, bigram.GetPayloadForCheckpoint, opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Tokenizer, tokenizer.GetPayloadForCheckpoint(), bigram.GetPayloadForCheckpoint(), opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
             json.Save(opts.Out, checkpoint);
         }
         else
         {
             Console.WriteLine("Incorrect model");
         }
+
+
+
     }
 
     public static void HandleParseError(IEnumerable<Error> errs)
