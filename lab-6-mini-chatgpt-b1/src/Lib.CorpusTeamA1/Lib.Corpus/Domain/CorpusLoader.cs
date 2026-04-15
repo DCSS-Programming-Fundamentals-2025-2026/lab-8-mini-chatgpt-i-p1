@@ -8,6 +8,12 @@ namespace Lib.Corpus.Domain
         private readonly CorpusTextNormalizer textNormalizer;
         private readonly CorpusSplitter corpusSplitter;
         private readonly IFileSystem defaultFileSystem;
+        private readonly string Version = "1.0.0";
+    
+        public string GetContractFingerprint()
+        {
+            return Version;
+        }
 
         public CorpusLoader(CorpusTextNormalizer textNormalizer, CorpusSplitter corpusSplitter, IFileSystem defaultFileSystem)
         {

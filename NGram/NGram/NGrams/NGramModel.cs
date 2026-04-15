@@ -3,6 +3,12 @@ public class NGramModel
 {
     private float[][] _probs;
     private NGramCounts _counts;
+    private readonly string Version = "1.0.0";
+    
+    public string GetContractFingerprint()
+    {
+        return Version;
+    }
 
     public NGramModel(int vocabSize){
         _probs = new float[vocabSize][];

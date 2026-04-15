@@ -31,10 +31,16 @@ class Trainer
     {
         Console.WriteLine($"Your model: {opts.Model}");
 
+        string TokenizerVer = "Unknown";
+        string CorpusVer = "Unknown";
+        string ModelVer = "Unknown";
+
         var splitter = new CorpusSplitter();
         var normilizer = new CorpusTextNormalizer();
         var fileSystem = new DefaultFileSystem();
         var loader = new CorpusLoader(normilizer, splitter, fileSystem);
+
+        CorpusVer = loader.GetContractFingerprint();
 
         string dataPath = opts.Data;
 
@@ -43,6 +49,8 @@ class Trainer
             Console.WriteLine("Файл не знайдено");
             return;
         }
+        
+        
 
         CorpusLoadOptions loadOptions = new();
         var corpus = loader.Load(dataPath, loadOptions);
@@ -65,6 +73,7 @@ class Trainer
         }
 
         Lib.Tokenization.Interfaces.ITokenizer tokenizer = tokenizerFactory.BuildFromText(corpus.TrainText);
+        TokenizerVer = tokenizer.GetContractFingerprint();
         int[] codedTrainTokens = tokenizer.Encode(corpus.TrainText);
 
         Console.WriteLine($"Токенізація успішна. Розмір словника: {tokenizer.VocabSize}");
@@ -85,6 +94,7 @@ class Trainer
             var nnFactory = new TinyNNModelFactory();
             var nnConfig = new TinyNNConfig(tokenizer.VocabSize, 64);
             TinyNNModel model = nnFactory.CreateNew(nnConfig, mathOps);
+            ModelVer = model.GetContractFingerprint();
             Console.WriteLine("TinyNN created successfully!");
 
             for (int i = 0; i < opts.Epochs; i++)
@@ -100,40 +110,41 @@ class Trainer
                 }
             }
 
-            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, model.ToPayload, opts.Seed, );
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, model.ToPayload, opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
             json.Save(opts.Out, checkpoint);
         }
         else if (opts.Model.ToLower() == "tinytransformer")
         {
             var tfConfig = new TinyTransformerConfig(tokenizer.VocabSize, 64, 2, 8, opts.Seed);
             TinyTransformerModel model = TinyTransformerModelFactory.CreateAuto(tfConfig);
+            ModelVer = model.GetContractFingerprint();
             Console.WriteLine("TinyTransformer created successfully!");
 
-
-
-            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, model.GetPayloadForCheckpoint, opts.Seed, );
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, model.GetPayloadForCheckpoint, opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
             json.Save(opts.Out, checkpoint);
 
         }
         else if (opts.Model.ToLower() == "trigram")
         {
             TrigramModel trigram = modelFactory.CreateTrigramModel((tokenizer.VocabSize));
+            ModelVer = trigram.GetContractFingerprint();
             Console.WriteLine("Trigram created successfully!");
 
             trigram.Train(codedTrainTokens);
 
-            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, trigram.GetPayloadForCheckpoint, opts.Seed, );
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, trigram.GetPayloadForCheckpoint, opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
             json.Save(opts.Out, checkpoint);
 
         }
         else if (opts.Model.ToLower() == "bigram")
         {
             NGramModel bigram = modelFactory.CreateBigramModel((tokenizer.VocabSize));
+            ModelVer = bigram.GetContractFingerprint();
             Console.WriteLine("Bigram created successfully!");
 
             bigram.Train(codedTrainTokens);
 
-            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, bigram.GetPayloadForCheckpoint, opts.Seed, );
+            Checkpoint checkpoint = new Checkpoint(opts.Model, opts.Model, tokenizer.GetPayloadForCheckpoint, bigram.GetPayloadForCheckpoint, opts.Seed, GenerateFingerprintChain(CorpusVer, TokenizerVer, ModelVer));
             json.Save(opts.Out, checkpoint);
         }
         else
@@ -145,5 +156,10 @@ class Trainer
     public static void HandleParseError(IEnumerable<Error> errs)
     {
         Console.WriteLine("Incorrect arguments");
+    }
+
+    private static string GenerateFingerprintChain(string corpusLoaderVer, string tokenizerVer, string modelVer)
+    {
+        return $"Lib.Corpus: {corpusLoaderVer}|Lib.Tokenization:{tokenizerVer}|Lib.Model:{modelVer}";
     }
 }

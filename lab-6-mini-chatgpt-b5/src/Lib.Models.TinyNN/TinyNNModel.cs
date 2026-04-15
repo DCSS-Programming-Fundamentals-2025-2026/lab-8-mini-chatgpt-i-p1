@@ -12,10 +12,15 @@ public class TinyNNModel  : ILanguageModel
     private readonly TinyNNConfig _config;
     private readonly TinyNNWeights _weights;
     private readonly IMathOps _mathOps;
-    public string GetContractFingerprint() => "TinyNN-A7-v1";
     public string ModelKind => "tinynn";
     public int VocabSize => _config.VocabSize;
-
+    private readonly string Version = "1.0.0";
+    
+    public string GetContractFingerprint()
+    {
+        return Version;
+    }
+    
     public TinyNNModel(TinyNNConfig config, TinyNNWeights weights, IMathOps mathOps)
     {
         _config = config;

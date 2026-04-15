@@ -6,6 +6,12 @@ public class TrigramModel
     private Dictionary<(int, int), float[]> _trigramProbs { get; set; }
     private float[][] _bigramProbs { get; set; }
     private NGramCounts _counts;
+    private readonly string Version = "1.0.0";
+    
+    public string GetContractFingerprint()
+    {
+        return Version;
+    }
 
     public TrigramModel(int vocabSize)
     {

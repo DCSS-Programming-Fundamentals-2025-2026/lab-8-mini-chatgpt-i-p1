@@ -6,6 +6,12 @@ namespace Lib.Tokenization;
 public class CharTokenizer : ITokenizer
 {
     private readonly Vocabulary _vocabulary;
+    private readonly string Version = "1.0.0";
+    
+    public string GetContractFingerprint()
+    {
+        return Version;
+    }
 
     public CharTokenizer(Vocabulary vocabulary)
     {

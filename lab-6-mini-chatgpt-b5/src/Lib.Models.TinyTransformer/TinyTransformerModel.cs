@@ -8,6 +8,12 @@ public class TinyTransformerModel
 {
     private readonly TinyTransformerConfig _config;
     private readonly MathOpsImpl _mathOps = new ();
+    private readonly string Version = "1.0.0";
+    
+    public string GetContractFingerprint()
+    {
+        return Version;
+    }
     public float[] NextTokenScores(int[] context)
     {
         TransformerBlock block = new TransformerBlock(_config);    

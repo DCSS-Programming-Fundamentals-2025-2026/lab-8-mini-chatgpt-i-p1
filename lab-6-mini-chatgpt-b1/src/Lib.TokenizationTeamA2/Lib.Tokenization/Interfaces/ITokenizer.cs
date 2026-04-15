@@ -6,5 +6,6 @@ namespace Lib.Tokenization.Interfaces
         int[] Encode(string text);
         string Decode(ReadOnlySpan<int> tokens);
         object GetPayloadForCheckpoint();
+        string GetContractFingerprint();
     }
 }
